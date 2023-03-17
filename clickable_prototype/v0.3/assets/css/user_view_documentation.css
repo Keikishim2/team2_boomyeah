@@ -864,16 +864,16 @@ body {
 .container {
   background-color: #FFFFFF;
   border-radius: 12px;
-  margin: 24px auto !important;
+  margin: 0px auto 24px !important;
   max-width: 1024px !important;
-  padding: 39px 24px 32px;
+  padding: 24px 24px 32px;
   position: relative;
   width: 100% !important;
 }
 .container #breadcrumb_list {
   display: flex;
   position: relative;
-  margin-bottom: 33px;
+  margin-bottom: 24px;
   font: 16px/24px 'ReadexPro-Regular', tahoma, verdana, arial, sans-serif;
 }
 .container #breadcrumb_list .mobile_breadcrumb {
@@ -936,7 +936,7 @@ body {
 .container .doc_text_content {
   color: #6C7177;
   font: 16px/24px 'ReadexPro-Regular', tahoma, verdana, arial, sans-serif;
-  margin: 0 0 96px;
+  margin: 0 0 24px;
   max-width: 893px;
   width: 100%;
 }

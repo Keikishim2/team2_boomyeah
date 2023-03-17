@@ -18,7 +18,8 @@
     $document_data = array(
         "document_id" => $document_id,
         "document_title" => $document_title,
-        "document_description" => "",
+        "document_description" => "This handbook replaces and supersedes all prior employee handbooks regarding employment or HR matters effective January 01, 2021. The policies and practices included in this handbook may be modified at any time.
+        Your department has additional specific procedures for many of the general policies stated in the handbook. You are expected to learn your department's procedures and comply with them. You are also expected to conform to the professional standards of your occupation. Please direct any questions to your supervisor, department head, or to the Human Resources Management and Development Office.",
         "is_private" => TRUE
     );
 
