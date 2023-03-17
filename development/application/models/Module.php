@@ -249,6 +249,7 @@
 
                     if($delete_section){
                         $module = $this->getModule($tab["result"]["module_id"]);
+
                         # Remove section_id from section_ids_order and update documentation record
                         $tabs_order = explode(",", $module["result"]["tab_ids_order"]);
                         $tab_index  = array_search($params["tab_id"], $tabs_order);
@@ -282,6 +283,172 @@
                 }
             }
             catch (Exception $e) {
+                $response_data["error"] = $e->getMessage();
+            }
+
+            return $response_data;
+        }
+
+        # DOCU: This function will reoder the tabs of a module
+        # Triggered by: (POST) module/reorder_tab
+        # Requires: $params { module_id, tab_ids_order }
+        # Returns: { status: true/false, result: { tab_id }, error: null }
+        # Last updated at: March 16, 2023
+        # Owner: Erick
+        public function reorderTab($params){
+            $response_data = array("status" => false, "result" => array(), "error" => null);
+
+            try {
+                $update_module_tab_ids_order = $this->db->query("UPDATE modules SET tab_ids_order = ?, updated_at = NOW() WHERE id = ?;", array($params["tab_ids_order"], $params["module_id"]));
+
+                if($update_module_tab_ids_order){
+                    $response_data["status"] = true;
+                }
+                else{
+                    throw new Exception("Unable to update order of the tabs.");
+                }
+            }
+            catch (Exception $e) {
+                $response_data["error"] = $e->getMessage();
+            }
+
+            return $response_data;
+        }
+
+        # DOCU: This function will fetch Post data and generate html
+        # Triggered by: (POST) modules/add_post
+        # Requires: $tab_id
+        # Returns: { status: true/false, result: { tab_id, html }, error: null }
+        # Last updated at: March 16, 2023
+        # Owner: Jovic
+        public function getPost($post_id){
+            $response_data = array("status" => false, "result" => array(), "error" => null);
+
+            try {
+                $get_post = $this->db->query("
+                    SELECT
+                        posts.id AS post_id, posts.tab_id, users.id AS user_id, CONCAT(users.first_name, ' ', users.last_name) AS first_name, posts.updated_at AS date_posted,
+                        posts.message, posts.cache_comments_count, users.profile_picture AS user_profile_pic,
+                        (CASE WHEN posts.created_at != posts.updated_at THEN 1 ELSE 0 END) AS is_edited
+                    FROM posts
+                    INNER JOIN users ON users.id = posts.user_id
+                    WHERE posts.id = ?
+                    ORDER BY posts.id DESC;", $post_id
+                );
+
+                if($get_post->num_rows()){
+                    $get_post = $get_post->result_array()[0];
+
+                    $response_data["result"]["tab_id"] = $get_post["tab_id"];
+                    $response_data["result"]["html"]   = $this->load->view("partials/comment_container_partial.php", array("comment_items" => [$get_post]), true);
+                }
+
+                $response_data["status"] = true;
+            }
+            catch (Exception $e) {
+                $response_data["error"] = $e->getMessage();
+            }
+
+            return $response_data;
+        }
+
+        # DOCU: This function will fetch Posts in a Tab and generate html
+        # Triggered by: (POST) modules/get_posts
+        # Requires: $tab_id
+        # Returns: { status: true/false, result: { tab_id, html }, error: null }
+        # Last updated at: March 16, 2023
+        # Owner: Jovic
+        public function getPosts($tab_id){
+            $response_data = array("status" => false, "result" => array(), "error" => null);
+
+            try {
+                $get_posts = $this->db->query("
+                    SELECT
+                        posts.id AS post_id, users.id AS user_id, CONCAT(users.first_name, ' ', users.last_name) AS first_name, posts.updated_at AS date_posted,
+                        posts.message, posts.cache_comments_count, users.profile_picture AS user_profile_pic,
+                        (CASE WHEN posts.created_at != posts.updated_at THEN 1 ELSE 0 END) AS is_edited
+                    FROM posts
+                    INNER JOIN users ON users.id = posts.user_id
+                    WHERE posts.tab_id = ?
+                    ORDER BY posts.id DESC;", $tab_id
+                );
+
+                if($get_posts->num_rows()){
+                    $response_data["result"]["tab_id"] = $tab_id;
+                    $response_data["result"]["html"]   = $this->load->view("partials/comment_container_partial.php", array("comment_items" => $get_posts->result_array()), true);
+                }
+
+                $response_data["status"] = true;
+            }
+            catch (Exception $e) {
+                $response_data["error"] = $e->getMessage();
+            }
+
+            return $response_data;
+        }
+
+        # DOCU: This function will create Post record and call getPost() to fetch Post record and generate html
+        # Triggered by: (POST) modules/add_post
+        # Requires: $params { tab_id, post_comment }, $_SESSION["user_id"]
+        # Returns: { status: true/false, result: { tab_id, html }, error: null }
+        # Last updated at: March 16, 2023
+        # Owner: Jovic
+        public function addPost($params){
+            $response_data = array("status" => false, "result" => array(), "error" => null);
+
+            try {
+                $this->db->trans_start();
+                $create_post = $this->db->query("INSERT INTO posts (user_id, tab_id, message, created_at, updated_at) VALUES (?, ?, ?, NOW(), NOW());", array($_SESSION["user_id"], $params["tab_id"], $params["post_comment"]));
+
+                if($create_post){
+                    $post_id = $this->db->insert_id();
+                    $update_cache_posts_count = $this->db->query("UPDATE tabs SET cache_posts_count = cache_posts_count + 1 WHERE id = ?;", $params["tab_id"]);
+
+                    if($update_cache_posts_count){
+                        $get_post = $this->getPost($post_id);
+
+                        if($get_post["status"]){
+                            $response_data = $get_post;
+                            $this->db->trans_complete();
+                        }
+                    }
+                }
+            }
+            catch (Exception $e) {
+                $this->db->trans_rollback();
+                $response_data["error"] = $e->getMessage();
+            }
+
+            return $response_data;
+        }
+
+        # DOCU: This function will update Post record and call getPost() to fetch Post record and generate html
+        # Triggered by: (POST) modules/add_post
+        # Requires: $params { post_id, post_comment }
+        # Returns: { status: true/false, result: { post_id, post_comment_id, html }, error: null }
+        # Last updated at: March 16, 2023
+        # Owner: Jovic
+        public function editPost($params){
+            $response_data = array("status" => false, "result" => array(), "error" => null);
+
+            try {
+                $this->db->trans_start();
+                $update_post = $this->db->query("UPDATE posts SET message = ?, updated_at = NOW() WHERE id = ?;", array($params["post_comment"], $params["post_id"]));
+
+                if($update_post){
+                    $get_post = $this->getPost($params["post_id"]);
+
+                    if($get_post["status"]){
+                        $response_data = $get_post;
+                        $response_data["result"]["post_id"]         = $params["post_id"];
+                        $response_data["result"]["post_comment_id"] = $params["post_id"];
+                        
+                        $this->db->trans_complete();
+                    }
+                }
+            }
+            catch (Exception $e) {
+                $this->db->trans_rollback();
                 $response_data["error"] = $e->getMessage();
             }
 

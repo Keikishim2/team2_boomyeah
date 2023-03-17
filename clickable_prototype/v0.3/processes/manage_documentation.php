@@ -570,6 +570,9 @@
             
             case "fetch_tab_posts" : {
                 $tab_id = intval($_POST["tab_id"]);
+                $view_data = array(
+                    "tab_posts" => []
+                );
 
                 foreach($tab_posts_data as &$tab){
                     if($tab["tab_id"] === $tab_id){

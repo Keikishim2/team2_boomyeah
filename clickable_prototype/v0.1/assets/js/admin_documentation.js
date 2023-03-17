@@ -42,12 +42,13 @@ $(document).ready(async function(){
         .on("click", ".set_privacy_btn", setDocumentPrivacyValues)
         .on("submit", "#change_document_privacy_form", onSubmitChangePrivacy)
         .on("click", ".document_block", redirectToDocumentView)
-        .on("click", ".invite_collaborators_btn", function(event){
+        .on("click", ".invite_collaborators_btn, .invite_icon", function(event){
             event.stopImmediatePropagation();
             event.preventDefault();
+            alert("Invite collaborator feature will be added in v0.2.");
             let invite_modal = document.querySelector("#modal1");
             var instance = M.Modal.getInstance(invite_modal);
-            instance.open();
+            instance.close();
         })
         .on("click", ".active_docs_btn", appearActiveDocumentation)
         .on("click", ".archived_docs_btn", appearArchivedDocumentations)
@@ -64,15 +65,18 @@ $(document).ready(async function(){
             event.stopImmediatePropagation();
             event.preventDefault();
             showConfirmPrivacyModal($(this).attr("data-document_id"), 1, "#confirm_to_private", $(this).closest(".document_block"));
-        });
+        })
+        .on("blur", ".document_title", (event) => {
+            /** Check if empty title; Revert to old title if empty */
+            if(!event.target.hasAttribute("readonly")){
+                ux(event.target.closest(".edit_title_form")).trigger("submit");
+            } 
+        })
+        ;
         
 });
 document.addEventListener("DOMContentLoaded", () => {
     ux("body")
-        .on("blur", ".document_title", (event) => {
-            /** Check if empty title; Revert to old title if empty */
-            ux((event.target).closest(".edit_title_form")).trigger("submit");
-        })
         .on("submit", ".edit_title_form", onChangeDocumentationTitle)
         .on("submit", "#duplicate_documentation_form", onSubmitDuplicateForm)
         .on("click", ".duplicate_icon", duplicateDocumentation)
@@ -439,8 +443,7 @@ function redirectToDocumentView(event){
         event.target.closest("li")){
             return;
     }
-
-    location.href = "admin_edit_documentation.php";
+    alert("Redirecting to the admin edit document page will be added in v0.2”");
 }
 
 function getDocumentations(event){

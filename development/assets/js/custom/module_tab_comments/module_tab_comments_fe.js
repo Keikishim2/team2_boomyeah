@@ -90,7 +90,7 @@ let is_mobile_reply_open = false;
     });
     
     async function animateSwipe(swipe_direction = ""){
-        let active_section_page = ux("#section_pages .section_page_content.active");
+        let active_section_page = ux("#section_pages .section_page_content .active");
         await active_section_page.removeClass("right");
         await active_section_page.removeClass("left");
         

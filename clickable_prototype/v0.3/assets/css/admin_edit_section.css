@@ -1039,6 +1039,7 @@ body::-webkit-scrollbar-thumb {
   font-size: 24px;
   height: 48px;
   line-height: 48px;
+  margin-top: 5px;
   padding: 0px 24px;
 }
 @media (max-width: 632px) {

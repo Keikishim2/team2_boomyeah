@@ -1,52 +1,134 @@
-
 {
-    "fetch_admin_data":[
+    "fetch_admin_data": [
+      {
+        "id": 263,
+        "title": "Employment Handbook",
+        "is_private": 1,
+        "is_archived": 0,
+        "cache_collaborators_count": 15
+      },
+      {
+        "id": 267,
+        "title": "Company Handout",
+        "is_private": 1,
+        "is_archived": 0,
+        "cache_collaborators_count": 15
+      },
+      {
+        "id": 3,
+        "title": "Accounting",
+        "is_private": 0,
+        "is_archived": 0,
+        "cache_collaborators_count": 0
+      },
+      {
+        "id": 4,
+        "title": "Admissions",
+        "is_private": 0,
+        "is_archived": 0,
+        "cache_collaborators_count": 0
+      },
+      {
+        "id": 5,
+        "title": "Engineering",
+        "is_private": 1,
+        "is_archived": 0,
+        "cache_collaborators_count": 15
+      },
+      {
+        "id": 6,
+        "title": "Trainee",
+        "is_private": 0,
+        "is_archived": 0,
+        "cache_collaborators_count": 0
+      },
+      {
+        "id": 7,
+        "title": "UI/UX",
+        "is_private": 1,
+        "is_archived": 0,
+        "cache_collaborators_count": 15
+      },
+      {
+        "id": 8,
+        "title": "Business Leads",
+        "is_private": 1,
+        "is_archived": 0,
+        "cache_collaborators_count": 15
+      },
+      {
+        "id": 9,
+        "title": "Instructors",
+        "is_private": 0,
+        "is_archived": 0,
+        "cache_collaborators_count": 0
+      },
+      {
+        "id": 10,
+        "title": "Intern",
+        "is_private": 0,
+        "is_archived": 0,
+        "cache_collaborators_count": 0
+      }
+    ],
+    "fetch_user_data":  [
         {
             "id": 263,
-            "title": "Sample 1",
+            "title": "Employment Handbook",
             "is_private": 1,
-            "is_archived": 0,
-            "cache_collaborators_count": 0
-        },
-        {
-            "id": 264,
-            "title": "Sample 2",
-            "is_private": 1,
-            "is_archived": 0,
-            "cache_collaborators_count": 0
-        },
-        {
-            "id": 265,
-            "title": "Sample 3",
-            "is_private": 1,
-            "is_archived": 0,
-            "cache_collaborators_count": 0
-        },
-        {
-            "id": 266,
-            "title": "Sample 4",
-            "is_private": 1,
-            "is_archived": 0,
-            "cache_collaborators_count": 0
+            "cache_collaborators_count": 15
         },
         {
             "id": 267,
-            "title": "Sample 5",
+            "title": "Company Handout",
             "is_private": 1,
-            "is_archived": 0,
-            "cache_collaborators_count": 0
-        }
-    ],
-    "fetch_user_data":[
+            "cache_collaborators_count": 15
+        },
         {
-            "id": 263,
-            "title": "Sample 1",
+            "id": 3,
+            "title": "Accounting",
             "is_private": 0,
             "cache_collaborators_count": 0
         },
         {
-            "id": 267,
-            "title": "Sample 5",
+            "id": 4,
+            "title": "Admissions",
+            "is_private": 0,
+            "cache_collaborators_count": 0
+        },
+        {
+            "id": 5,
+            "title": "Engineering",
+            "is_private": 1,
+            "cache_collaborators_count": 15
+        },
+        {
+            "id": 6,
+            "title": "Trainee",
+            "is_private": 0,
+            "cache_collaborators_count": 0
+        },
+        {
+            "id": 7,
+            "title": "UI/UX",
+            "is_private": 1,
+            "cache_collaborators_count": 15
+        },
+        {
+            "id": 8,
+            "title": "Business Leads",
+            "is_private": 1,
+            "cache_collaborators_count": 15
+        },
+        {
+            "id": 9,
+            "title": "Instructors",
+            "is_private": 0,
+            "cache_collaborators_count": 0
+        },
+        {
+            "id": 10,
+            "title": "Intern",
             "is_private": 0,
             "cache_collaborators_count": 0
         }

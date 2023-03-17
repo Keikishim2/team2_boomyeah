@@ -29,7 +29,7 @@ document.addEventListener("DOMContentLoaded", () => {
     ux("body")
         .on("click", ".active_docs_btn", appearActiveDocumentation)
         .on("click", ".archived_docs_btn", appearArchivedDocumentations)
-        .on("click", ".document_block", redirectToDocumentView)
+        .on("click", ".document_block, .edit_title_form, .document_title", redirectToDocumentView)
         .on("click", ".edit_title_icon", toggleEditDocumentationTitle)
         .on("click", ".duplicate_icon", duplicateDocumentation)
         .on("click", ".archive_btn", setArchiveDocumentationValue)

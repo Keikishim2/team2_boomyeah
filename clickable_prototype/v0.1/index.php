@@ -26,7 +26,6 @@
                 <a href="./views/pages/admin_documentation.php">Admin Documentations Page</a>
                 <p>
                     <span> User Stories</span>
-                    (P10) As an admin, I want to be able to choose whether the documentation is to be available to everyone or not so that I’d feel comfortable in sharing confidential documents with others. <br/> <br/>
                     (P9) As an admin, I want to be able to create and manage documentation so that I will enjoy guiding more and make sure that each member of the team has access to the information they need to succeed in their work and feel satisfied.
                 </p>
                 <a href="./views/pages/user_documentation.php">User Documentations Page</a>
@@ -36,7 +35,6 @@
                 </p>
                 <h2>Figma Design</h2>
                 <iframe style="border: 1px solid rgba(0, 0, 0, 0.1);" class="frame_display" src="https://www.figma.com/embed?embed_host=share&url=https%3A%2F%2Fwww.figma.com%2Ffile%2F7sD1iBde0wOo0CjXn01mqU%2FBoomYEAH%3Fnode-id%3D2364%253A124362%26t%3Dh80dXGRUUdtY9p8B-1" allowfullscreen></iframe>
-                <a href="https://tinyurl.com/Roadmap-Spreadsheet-Link">Product Roadmap Spreadsheet Link</a>
             </div>
         </div>
     </body>

@@ -218,7 +218,6 @@ function initializeRedactor(selector){
         },
         buttons: {
             context: ['bold', 'italic', 'deleted', 'link'],
-            addbar: ['paragraph', 'table', 'quote', 'pre', 'line'],
             topbar: ['undo', 'redo']
         },
         subscribe: {

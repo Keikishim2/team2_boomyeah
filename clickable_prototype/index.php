@@ -30,17 +30,16 @@
                 <h2>Clickable Prototype Links</h2>
                 <ul>
                     <li>
-                        <a href="./v0.1/index.php">v0.1</a>
+                        <a href="./v0.1/index.php" target="_blank">v0.1</a>
                         (Login Page, Admin Documentations Page, User Documentations Page)
                     </li>
                     <li>
-                        <a href="./v0.2/index.php">v0.2</a>
+                        <a href="./v0.2/index.php" target="_blank">v0.2</a>
                         (Admin Edit Documentations Page, User View Documentations Page + Invite Collaborator Modal Feature)
                     </li>
                     <li>
-                        <a href="./v0.3/index.php">v0.3</a>
+                        <a href="./v0.3/index.php" target="_blank">v0.3</a>
                         (Admin Edit Section Page, User View Section Page (Text & Discussion))
-                    </li>
                     </li>
                     <li>
                         <a href="./v0.4/index.php">v0.4</a>
@@ -48,9 +47,9 @@
                     </li>
                 </ul>
                 <h2>Figma Design</h2>
-                <iframe style="border: 1px solid rgba(0, 0, 0, 0.1);" class="frame_display" src="https://www.figma.com/embed?embed_host=share&url=https%3A%2F%2Fwww.figma.com%2Ffile%2F7sD1iBde0wOo0CjXn01mqU%2FBoomYEAH%3Fnode-id%3D2364%253A124364%26t%3Dh80dXGRUUdtY9p8B-1" allowfullscreen></iframe>
-                <a href="https://tinyurl.com/Roadmap-Spreadsheet-Link">Product Roadmap Spreadsheet Link</a>
-                <a href="https://tinyurl.com/Github-Repo-Link">Github Repo Link</a>
+                <iframe style="border: 1px solid rgba(0, 0, 0, 0.1);"class="frame_display" src="https://www.figma.com/embed?embed_host=share&url=https%3A%2F%2Fwww.figma.com%2Ffile%2F7sD1iBde0wOo0CjXn01mqU%2FBoomYEAH%3Fnode-id%3D2790%253A125381%26t%3DRR87KRAW8ttfuVXS-1" allowfullscreen></iframe>
+                <a href="https://tinyurl.com/Roadmap-Spreadsheet-Link" target="_blank">Product Roadmap Spreadsheet Link</a>
+                <a href="https://tinyurl.com/Github-Repo-Link" target="_blank">Github Repo Link</a>
             </div>
         </div>
     </body>

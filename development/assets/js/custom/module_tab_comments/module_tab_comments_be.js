@@ -38,13 +38,22 @@ function onSubmitPostForm(event){
     
     ux().post(post_form.attr("action"), post_form.serialize(), async (response_data) => {
         if(response_data.status){
-            let tab_id = `#tab_${response_data.result.tab_id}`;
-            let comments_list = ux(tab_id).find(".tab_comments .comments_list");
-            let toggle_btn = ux(tab_id).find(".fetch_tab_posts_btn");
+            let tab_id            = `#tab_${response_data.result.tab_id}`;
+            let comments_list     = ux(tab_id).find(".tab_comments .comments_list");
+            let toggle_btn        = ux(tab_id).find(".fetch_tab_posts_btn");
+            let show_comments_btn = ux(tab_id).find(".show_comments_btn");
+            let posts_count       = parseInt(toggle_btn.data("cache_posts_count"));
 
             (toggle_btn.self() && !toggle_btn.self().classList.contains("open")) && fetch_tab_posts_btn.trigger("click");
             
-            comments_list.append(response_data.result.html);
+            /* Update cache_posts_count */
+            posts_count += 1;
+            toggle_btn.attr("data-cache_posts_count", posts_count);
+            toggle_btn.html(`Comments (${posts_count})`);
+            show_comments_btn.attr("data-cache_posts_count", posts_count);
+            show_comments_btn.html(`Comments (${posts_count})`);
+
+            comments_list.prepend(response_data.result.html);
             setTimeout(() => {
             }, 200);
 
@@ -111,12 +120,13 @@ function onAddPostComment(event){
         if(response_data.status){
             let comment_id = `#comment_${response_data.result.post_id}`;
             let comments_list = ux(comment_id).find(".replies_list");
-            let toggle_replies_btn = ux(comment_id).find(".toggle_replies_btn b");
-            toggle_replies_btn.trigger("click");
-            
-            setTimeout(() => {
+            let toggle_replies_btn = ux(comment_id).find(".toggle_replies_btn");
+
+            if(toggle_replies_btn.self()){
+                toggle_replies_btn.find("b").trigger("click");
+            } else {
                 comments_list.append(response_data.result.html);
-            }, 200);
+            }
 
             post_form.self().reset();
             post_form.find(".comment_message").self().blur();
@@ -140,7 +150,7 @@ function showRepliesList(event){
         let post_comments_form = ux("#fetch_post_comments_form");
         post_comments_form.find(".post_id").val(post_id);
         post_comments_form.trigger("submit");
-        ux(show_replies_btn).addClass("hidden");
+        ux(show_replies_btn).remove();
     }
 }
 

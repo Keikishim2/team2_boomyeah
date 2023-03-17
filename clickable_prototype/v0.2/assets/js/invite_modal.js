@@ -99,7 +99,7 @@ function addEmail(email){
 
 function addPeopleWithAccess(event){
     event.stopImmediatePropagation();
-
+    ux("#email_address").self().blur();
     if(invited_emails.length > 0){
         let add_collaborators_form = ux("#add_collaborators_form");
         add_collaborators_form.find(".collaborator_emails").val(invited_emails.join(","));

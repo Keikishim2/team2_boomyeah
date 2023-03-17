@@ -1,0 +1,25 @@
+version: '3.3'
+services:
+    prototype:
+        image: nginx:latest
+        ports:
+            - "8080:80"
+        volumes:
+            - ./clickable_prototype:/clickable_prototype
+            - ./clickable_prototype/site.conf:/etc/nginx/conf.d/default.conf
+        links:
+            - php
+    development:
+        image: nginx:latest
+        ports:
+            - "8082:80"
+        volumes:
+            - ./development:/development
+            - ./development/site.conf:/etc/nginx/conf.d/default.conf
+        links:
+            - php
+    php:
+        build: ./development
+        volumes:
+            - ./development:/development
+            - ./clickable_prototype:/clickable_prototype

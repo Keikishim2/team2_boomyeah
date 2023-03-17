@@ -307,7 +307,7 @@
 				$sections = $this->Section->getSection($section_id);
 
 				if($sections["status"] && $sections["result"]){
-					$modules  = $this->Section->getSectionTabs($section_id);
+					$modules = $this->Section->getSectionTabs($section_id);
 	
 					$this->load->view('documentations/user_view_section', array("documentation" => $documentation["result"], "section" => $sections["result"], "modules" => $modules["result"]));
 				}
